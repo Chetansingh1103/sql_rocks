@@ -1,16 +1,17 @@
 package com.example.Sql_Rocks;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jdk.jfr.Name;
 
 @Entity  // So that hibernate can identify whose attributes to pick for table creation
 @Table(name = "user_info") // this is just for the giving table name, byDefault : tableName == classname
 public class User {
     @Id // it is written on that attribute which has become the primary key
+    @Column(unique = true)
     private int id; // id is the primary key
+
+    @Column(unique = true)
+    private String email;
 
     private String name;
 
@@ -18,19 +19,25 @@ public class User {
 
     private String mobileNumber;
 
+    @Column(name="country_name")
+    private String country;
+
     // Always create the default constructor
     public User() {
 
     }
 
     // good practice is to create all args constructor
-    public User(int id, String name, int age,String mobileNumber) {
+
+
+    public User(int id, String email, String name, int age, String mobileNumber, String country) {
         this.id = id;
+        this.email = email;
         this.name = name;
         this.age = age;
         this.mobileNumber = mobileNumber;
+        this.country = country;
     }
-
 
     //creating getter and setters
     //Shortcut is use Alt + Insert
@@ -64,5 +71,21 @@ public class User {
 
     public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }
